@@ -12,7 +12,7 @@ public class BluetoothActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tic_tac_toe);
+        setContentView(R.layout.activity_nfc);
     }
 
     @Override
