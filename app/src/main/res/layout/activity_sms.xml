@@ -28,6 +28,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="NFC"
+        android:id="@+id/nfc_button" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="Contacts"
         android:id="@+id/contact_button" />
 
