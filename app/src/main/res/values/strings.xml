@@ -4,7 +4,15 @@
     <string name="title_activity_tic_tac_toe">TicTacToeActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+<<<<<<< HEAD
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+=======
+    <string name ="title">DMS Assignment Three</string>
+    <string name ="enter_message">Type your message</string>
+    <string name="enter_number">Phone Number</string>
+    <string name="default_number">5545</string>
+    <string name="send_button">SEND</string>
+>>>>>>> origin/master
 </resources>
