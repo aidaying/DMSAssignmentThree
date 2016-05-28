@@ -19,8 +19,8 @@ public class SendSMS extends Activity implements View.OnClickListener {
     private Button sendButton;
     private Button contactButton;
     private Button nfcButton;
-    private SMSSentBroadcastReceiver sentBroadcastReceiver;
-    private SMSDeliveredBroadcastReceiver deliveredBroadcastReceiver;
+    private MessageSentBroadcastReceiver sentBroadcastReceiver;
+    private MessageDeliveredBroadcastReceiver deliveredBroadcastReceiver;
     private final String SMS_SENT_ACTION = "SMS_SENT";
     private final String SMS_DELIVERED_ACTION = "SMS_DELIVERED";
 
@@ -41,10 +41,10 @@ public class SendSMS extends Activity implements View.OnClickListener {
         super.onStart();
 
         // create send broadcast receiver and register it
-        sentBroadcastReceiver = new SMSSentBroadcastReceiver();
+        sentBroadcastReceiver = new MessageSentBroadcastReceiver();
         registerReceiver(sentBroadcastReceiver, new IntentFilter(SMS_SENT_ACTION));
         // create delivered broadcast receiver and register it
-        deliveredBroadcastReceiver = new SMSDeliveredBroadcastReceiver();
+        deliveredBroadcastReceiver = new MessageDeliveredBroadcastReceiver();
         registerReceiver(deliveredBroadcastReceiver, new IntentFilter(SMS_DELIVERED_ACTION));
     }
 
@@ -77,7 +77,7 @@ public class SendSMS extends Activity implements View.OnClickListener {
             PendingIntent sentPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(SMS_SENT_ACTION), 0);
             PendingIntent deliveredPendingIntent = PendingIntent.getBroadcast(this, 0, new Intent(SMS_DELIVERED_ACTION), 0);
             SmsManager smsManager = SmsManager.getDefault();
-            smsManager.sendTextMessage(numberString, null, messageString, sentPendingIntent, deliveredPendingIntent));
+            smsManager.sendTextMessage(numberString, null, messageString, sentPendingIntent, deliveredPendingIntent);
         }
 
         if(view == contactButton) {
@@ -85,10 +85,6 @@ public class SendSMS extends Activity implements View.OnClickListener {
 
         }
 
-        if(view == nfcButton) {
-
-
-        }
     }
 
 }

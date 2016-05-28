@@ -10,4 +10,28 @@
     tools:context="develop.personal.aida.dmsassignmentthree.MainActivity">
 
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Send SMS"
+        android:id="@+id/button_sms"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="124dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Use NFC to Add Contacts"
+        android:id="@+id/button_nfc"
+        android:layout_below="@+id/button_sms"
+        android:layout_centerHorizontal="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact list"
+        android:id="@+id/button_contact"
+        android:layout_below="@+id/button_nfc"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
