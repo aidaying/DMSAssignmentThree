@@ -2,16 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="develop.personal.aida.dmsassignmentthree">
 
-<<<<<<< HEAD
+
     <uses-permission android:name="android.permission.NFC"/>
-=======
-    <uses-permission android:name="android.permission.BLUETOOTH" />
+
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
->>>>>>> origin/master
+
 
     <application
         android:allowBackup="true"
@@ -26,11 +25,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-<<<<<<< HEAD
-=======
-        <activity android:name=".TicTacToeActivity" />
+
         <activity android:name=".nfc"></activity>
->>>>>>> origin/master
+        <activity android:name=".SendSMS"></activity>
     </application>
 
 </manifest>
