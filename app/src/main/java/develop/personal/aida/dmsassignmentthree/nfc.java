@@ -1,9 +1,9 @@
 package develop.personal.aida.dmsassignmentthree;
 
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
 import android.os.Bundle;
 
-public class nfc extends AppCompatActivity {
+public class nfc extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

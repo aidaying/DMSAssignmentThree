@@ -1,52 +1,41 @@
 package develop.personal.aida.dmsassignmentthree;
 
-import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-
-import android.app.Activity;
-import android.app.Fragment;
-import android.content.ContentUris;
-import android.content.Context;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Intent;
-
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
-import android.provider.ContactsContract.Contacts;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
- * Created by minju on 5/15/2016.
+ * Created by minju on 5/29/2016.
  */
+public class ContactsDialog extends DialogFragment {
 
-public class ContactsFragment extends Fragment {
-    private View rootView;
-    private ListView lv_contactlist;
+
+    private ListView dialogContactList;
+    private OnMyDialogResult mDialogResult;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        rootView = inflater.inflate(R.layout.contacts_layout, container, false);
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
-        lv_contactlist = (ListView) rootView.findViewById(R.id.contact_list);
-
+        // Get the layout inflater
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View DialogView = inflater.inflate(R.layout.dialog_contacts, null);
+        dialogContactList = (ListView) DialogView.findViewById(R.id.dialogClistView);
         ContactsAdapter adapter = new ContactsAdapter(this.getActivity(), R.layout.contacts_list_item, getContactList());
 
-        lv_contactlist.setAdapter(adapter);
-        lv_contactlist
+        dialogContactList.setAdapter(adapter);
+        dialogContactList
                 .setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
                     @Override
@@ -55,15 +44,28 @@ public class ContactsFragment extends Fragment {
                         Contact phonenumber = (Contact) contactlist
                                 .getItemAtPosition(position);
 
+                        String number = phonenumber.getPhonenum();
                         if (phonenumber == null) {
                             return;
                         }
 
-                        //Intent data = new Intent();
+                        if( mDialogResult != null ){
+                            mDialogResult.finish(number);
+                        }
+
 
                     }
                 });
-        return rootView;
+
+        builder.setTitle("Contacts Number");
+        builder.setView(DialogView);
+        return builder.create();
+
+    }
+
+
+    public void setDialogResult(OnMyDialogResult dialogResult){
+        mDialogResult = dialogResult;
     }
 
     private ArrayList<Contact> getContactList() {
@@ -86,16 +88,10 @@ public class ContactsFragment extends Fragment {
 
         if(contactCursor.moveToFirst()) {
             do {
-                String phonenumber = contactCursor.getString(1).replaceAll("-", "");
-                if (phonenumber.length() == 10) {
-                    phonenumber = phonenumber.substring(0, 3) + "-"
-                            + phonenumber.substring(3, 6) + "-"
-                            + phonenumber.substring(6);
-                } else if (phonenumber.length() > 8) {
-                    phonenumber = phonenumber.substring(0, 3) + "-"
-                            + phonenumber.substring(3, 7) + "-"
-                            + phonenumber.substring(7);
-                }
+                String p = contactCursor.getString(1).replaceAll("-", "");
+                String phone = p.replaceAll("\\(","");
+                String phonenumber =phone.replaceAll("\\)","");
+
 
                 Contact acontact = new Contact();
                 acontact.setPhotoid(contactCursor.getLong(0));
@@ -109,8 +105,14 @@ public class ContactsFragment extends Fragment {
 
         return contactlist;
 
+
     }
 
-
-
+    public interface OnMyDialogResult{
+        void finish(String result);
+    }
 }
+
+
+
+
